@@ -9,7 +9,7 @@ import com.tamimehsan.data.Database;
 public class Main {
 
     public static void main(String[] args) {
-        
+
         boolean success = Database.getInstance().readData();
         boolean gameLoop = true;
         while(gameLoop){
