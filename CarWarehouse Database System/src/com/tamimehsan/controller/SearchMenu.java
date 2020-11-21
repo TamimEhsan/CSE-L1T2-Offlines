@@ -1,6 +1,6 @@
 package com.tamimehsan.controller;
 
-import com.tamimehsan.Car;
+import com.tamimehsan.classes.Car;
 import com.tamimehsan.IO.Console;
 import com.tamimehsan.data.Database;
 import com.tamimehsan.IO.MyColor;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SearchMenu {
 
-    public void SearchOptionController(){
+    public void view(){
         boolean gameLoop = false;
         while(!gameLoop){
             gameLoop = showOptionMenu();
@@ -51,9 +51,9 @@ public class SearchMenu {
                             "║ What is the registration number of the car?  ║" + "\n" +
                             "╚══════════════════════════════════════════════╝");
 
-        String regNumber = Console.getInstance().getInput();
-        Car car = Database.getInstance().searchCarByRegistrationNumber(regNumber);
-        Console.getInstance().printCar(car);
+        String regNumber = Console.getInstance().getInput("Enter Registration Number: ");
+        List<Car> car = Database.getInstance().searchCarByRegistrationNumber(regNumber);
+        Console.getInstance().printCars(car);
     }
     public void getCarMakeModel(){
         System.out.println( "╔══════════════════════════════════════════════╗" + "\n" +
@@ -61,11 +61,11 @@ public class SearchMenu {
                             "╠══════════════════════════════════════════════╣" + "\n" +
                             "║ What is the car make of the car?             ║");
 
-        String carMake = Console.getInstance().getInput();
+        String carMake = Console.getInstance().getInput("Enter Car Make: ");
         System.out.println( "║ What's the car model of your car?            ║" + "\n" +
                             "║ (any for any car under the above make)       ║");
 
-        String carModel = Console.getInstance().getInput();
+        String carModel = Console.getInstance().getInput("Enter Car Model: ");
         System.out.println( "╚══════════════════════════════════════════════╝");
         List<Car> cars =  Database.getInstance().searchByMadeAndMake(carMake,carModel);
         Console.getInstance().printCars(cars);

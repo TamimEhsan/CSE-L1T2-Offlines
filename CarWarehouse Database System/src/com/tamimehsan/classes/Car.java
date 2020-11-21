@@ -1,4 +1,4 @@
-package com.tamimehsan;
+package com.tamimehsan.classes;
 
 public class Car {
     private String registrationNumber;
@@ -88,7 +88,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return  registrationNumber +
+        return registrationNumber +
                 "," + yearMade +
                 "," + color1 +
                 "," + color2 +

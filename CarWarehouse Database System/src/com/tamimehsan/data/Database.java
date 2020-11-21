@@ -1,6 +1,7 @@
 package com.tamimehsan.data;
 
-import com.tamimehsan.Car;
+import com.tamimehsan.IO.Console;
+import com.tamimehsan.classes.Car;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 public class Database {
     private static Database instance;
     private static final String INPUT_FILE_NAME = "src/com/tamimehsan/data/cars.txt";
-    private static final String OUTPUT_FILE_NAME = "cars.txt";
+    private static final String OUTPUT_FILE_NAME = "src/com/tamimehsan/data/cars.txt";
     private List <Car> cars;
     private Database() {
         cars = new ArrayList<Car>();
@@ -44,27 +45,34 @@ public class Database {
         cars.add(car);
     }
 
-    public Car searchCarByRegistrationNumber(String registrationNumber){
-
+    public List<Car> searchCarByRegistrationNumber(String registrationNumber){
+        List<Car> searchedCars = new ArrayList<Car>();
         for(Car car: cars){
-            if( car.getRegistrationNumber().equalsIgnoreCase(registrationNumber) == true ){
-                return car;
+            if( car.getRegistrationNumber().equals(registrationNumber) ){
+                searchedCars.add(car);
+                return searchedCars;
             }
         }
-        return null;
+        return searchedCars;
     }
     public List<Car> searchByMadeAndMake(String carMake,String carModel){
         List<Car> searchedCars = new ArrayList<Car>();
         for(Car car:cars){
-            if( (car.getCarModel().equalsIgnoreCase(carModel) == true && car.getCarMake().equalsIgnoreCase(carMake)) || carModel.equalsIgnoreCase("ANY") ){
+            if( (car.getCarModel().equalsIgnoreCase(carModel) && car.getCarMake().equalsIgnoreCase(carMake)) ||  car.getCarMake().equalsIgnoreCase(carMake) && carModel.equalsIgnoreCase("ANY") ){
                 searchedCars.add(car);
             }
         }
         return searchedCars;
     }
 
-    public void addCar(String carToAdd){
-        addDataFromString(carToAdd);
+    public boolean addCar(String carToAdd){
+        String[] infos = carToAdd.split(",");
+        if( searchCarByRegistrationNumber(infos[0]).size()>0 ){
+            return false;
+        }else {
+            addDataFromString(carToAdd);
+            return true;
+        }
     }
 
     public void deleteCar(Car carToRemove){

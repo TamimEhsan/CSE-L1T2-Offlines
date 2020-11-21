@@ -1,6 +1,6 @@
 package com.tamimehsan.IO;
 
-import com.tamimehsan.Car;
+import com.tamimehsan.classes.Car;
 
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +19,7 @@ public class Console {
     }
 
     public int getOption(){
+        System.out.print("Enter Selected Option: ");
         String s = scanner.nextLine();
         try{
             int option = Integer.parseInt(s);
@@ -38,21 +39,17 @@ public class Console {
             System.out.println("xxxxxxxxxxxxxxxxxxxxxx Selected Cars xxxxxxxxxxxxxxxxxxxxxxx");
             System.out.println("############################################################"+MyColor.ANSI_GREEN);
             for(Car car:cars){
-                System.out.println(car);
+                printCar(car);
+                System.out.println(MyColor.ANSI_BLUE+"############################################################"+MyColor.ANSI_GREEN);
             }
-            System.out.println(MyColor.ANSI_BLUE+"############################################################"+MyColor.ANSI_RESET);
+            System.out.print(MyColor.ANSI_RESET);
         }
     }
     public void printCar(Car car){
-        if( car == null ){
-            printError("No such car with this registration number");
-        }else {
-            System.out.println(MyColor.ANSI_BLUE+  "############################################################");
-            System.out.println("xxxxxxxxxxxxxxxxxxxxxxx Selected Car xxxxxxxxxxxxxxxxxxxxxxx");
-            System.out.println("############################################################"+MyColor.ANSI_GREEN);
-            System.out.println(car);
-            System.out.println(MyColor.ANSI_BLUE+"############################################################"+MyColor.ANSI_RESET);
-        }
+        System.out.println(car.getCarMake()+" - "+car.getCarModel()+" ("+car.getYearMade()+")\n"+
+                "Registration Number: "+car.getRegistrationNumber()+"\n"+
+                "Color: "+car.getColor1()+" "+car.getColor2()+" "+car.getColor3()+"\n"+
+                "Price: $"+car.getPrice());
     }
 
     public void printSuccess(String color,String message){
@@ -68,7 +65,8 @@ public class Console {
         }
         System.out.println("\n▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓"+MyColor.ANSI_RESET);
     }
-    public String getInput(){
+    public String getInput(String prompt){
+        System.out.print(prompt);
         String input = scanner.nextLine();
         return input;
     }

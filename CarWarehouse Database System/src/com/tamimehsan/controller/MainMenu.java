@@ -7,6 +7,13 @@ import com.tamimehsan.IO.MyColor;
 
 public class MainMenu {
 
+    public void view(){
+        boolean gameLoop = true;
+        while(gameLoop){
+            gameLoop =  showOption();
+        }
+    }
+
     public boolean showOption(){
         System.out.println( "╔══════════════════════════════════╗" + "\n" +
                             "║             "+ MyColor.ANSI_YELLOW +"Main Menu"+ MyColor.ANSI_RESET +"            ║" + "\n" +
@@ -20,13 +27,13 @@ public class MainMenu {
         int options = Console.getInstance().getOption();
         switch(options){
             case 1:
-                new SearchMenu().SearchOptionController();
+                new SearchMenu().view();
                 break;
             case 2:
-                new AddCarMenu().addCars();
+                new AddCarMenu().view();
                 break;
             case 3:
-                new DeleteCarMenu().deleteCars();
+                new DeleteCarMenu().view();
                 break;
             case 4:
                 Console.getInstance().printSuccess(MyColor.ANSI_CYAN,"✋Thank you for staying with us");
